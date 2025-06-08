@@ -1,0 +1,13 @@
+[project]
+name = "devops-llm"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.12"
+dependencies = [
+    "litellm>=1.72.2",
+    "loguru>=0.7.3",
+    "openai>=1.84.0",
+]
+
+[tool.uv]
+index-url = "https://mirrors.aliyun.com/pypi/simple/"
