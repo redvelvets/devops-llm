@@ -16,3 +16,5 @@ temp/*
 .mypy_cache
 .ruff_cache
 .venv
+
+.secrets.toml

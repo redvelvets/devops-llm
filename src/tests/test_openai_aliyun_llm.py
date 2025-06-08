@@ -1,16 +1,17 @@
 from openai import OpenAI
 from loguru import logger
+from src.config.config_loader import get_settings
+
+settings = get_settings()
 def test_aliyun_llm():
 
     client = OpenAI(
-        # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key="sk-xxx",
-        api_key="<your-ailiyun-bailian-token>",
-        base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
+        api_key=settings.openai_qwen_plus.api_key,
+        base_url=settings.openai_qwen_plus.api_base,
     )
 
     completion = client.chat.completions.create(
-        # 模型列表：https://help.aliyun.com/zh/model-studio/getting-started/models
-        model="qwen-plus",
+        model=settings.openai_qwen_plus.model,
         messages=[
             {"role": "system", "content": "You are a helpful assistant."},
             {"role": "user", "content": "你是谁？"},

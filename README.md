@@ -31,6 +31,28 @@
 
 ---
 
+## 🔐 配置管理
+
+本项目使用 `.secrets.toml` 文件进行敏感信息管理，位于 `src/config/` 目录下，包含阿里云 DashScope 的 API Key 和模型配置。
+
+示例配置如下：
+```toml
+# src/config/.secrets.toml
+[litellm_qwen_plus]
+model="openai/qwen-plus"
+api_base = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+api_key = "<你的阿里云百炼平台的token>"
+
+[openai_qwen_plus]
+model="qwen-plus"
+api_base = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+api_key = "<你的阿里云百炼平台的token>"
+```
+
+> ⚠️ 注意：请勿将 `.secrets.toml` 提交到版本控制中，它已加入 `.gitignore`。
+
+---
+
 ## 📦 依赖管理
 
 本项目使用 [`uv`](https://docs.astral.sh/uv/) 作为依赖管理和构建工具，替代了传统的 Poetry 或 pipenv。
@@ -59,9 +81,12 @@ uv develop
 
 ```
 src/
+├── config/
+│   ├── .secrets.toml         # 敏感配置文件（未提交）
+│   └── config_loader.py      # 配置加载模块
 └── test/
-    ├── test_openai_aliyun_llm.py       # 使用 openai SDK 调用阿里云 LLM
-    └── test_litellm_aliyun_llm.py      # 使用 litellm 调用 LLM
+    ├── test_openai_aliyun_llm.py     # 使用 openai SDK 调用阿里云 LLM
+    └── test_litellm_aliyun_llm.py    # 使用 litellm 调用 LLM
 ```
 
 > ⚠️ 注意：MCP 模块尚未开始开发，相关目录和文件暂未创建。
@@ -73,9 +98,7 @@ src/
 运行测试示例：
 
 ```bash
-cd src/test
-python test_openai_aliyun_llm.py
-python test_litellm_aliyun_llm.py
+uv run src/tests/test_litellm_aliyun_llm.py
 ```
 
 ---

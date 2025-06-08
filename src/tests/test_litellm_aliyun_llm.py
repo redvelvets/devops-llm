@@ -1,16 +1,19 @@
 import litellm
 from loguru import logger
+from src.config.config_loader import get_settings
+
+settings = get_settings()
 
 def test_aliyun_llm():
     try:
+
         # 设置API密钥和基础URL
-        # 若没有配置环境变量，请用百炼API Key将下行替换为：api_key="sk-xxx",
-        litellm.api_key = "<your-ailiyun-bailian-token>"
-        litellm.api_base = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+        litellm.api_key = settings.litellm_qwen_plus.api_key
+        litellm.api_base = settings.litellm_qwen_plus.api_base
 
         # 调用Qwen-Plus模型
         response = litellm.completion(
-            model="openai/qwen-plus",
+            model=settings.litellm_qwen_plus.model,
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": "你是谁？"},

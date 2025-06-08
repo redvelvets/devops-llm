@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "Add your description here"
 requires-python = ">=3.12"
 dependencies = [
+    "dynaconf>=3.2.11",
     "litellm>=1.72.2",
     "loguru>=0.7.3",
     "openai>=1.84.0",
