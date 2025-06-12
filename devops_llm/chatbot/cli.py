@@ -6,7 +6,7 @@ import json
 from typing import Dict, Any
 
 from loguru import logger
-from src.chatbot.chatbot import Chatbot
+from chatbot import Chatbot
 
 def display_bot_response(response_data: Dict[str, Any]) -> None:
     """

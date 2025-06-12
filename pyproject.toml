@@ -12,7 +12,3 @@ dependencies = [
 
 [tool.uv]
 index-url = "https://mirrors.aliyun.com/pypi/simple/"
-
-[tool.setuptools]
-package-dir = {"" = "src"}
-packages = ["chatbot", "config"]

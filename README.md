@@ -22,8 +22,8 @@
 - 使用 `litellm` 进行统一接口调用，支持多种后端（OpenAI、DashScope 等）
 
 #### 示例文件：
-- [test_openai_aliyun_llm.py](src/tests/test_openai_aliyun_llm.py)
-- [test_litellm_aliyun_llm.py](src/tests/test_litellm_aliyun_llm.py)
+- [test_openai_aliyun_llm.py](tests/test_openai_aliyun_llm.py)
+- [test_litellm_aliyun_llm.py](tests/test_litellm_aliyun_llm.py)
 
 #### 特点：
 - 支持 system/user/assistant 角色对话
@@ -38,7 +38,7 @@
 - 支持对话历史管理
 
 #### 示例文件：
-- [test_chatbot.py](src/tests/test_chatbot.py)
+- [test_chatbot.py](tests/test_chatbot.py)
 
 #### 特点：
 - 支持获取当前时间、执行数学计算和知识库搜索等工具函数

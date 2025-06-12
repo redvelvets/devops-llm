@@ -6,8 +6,8 @@ from typing import Dict, Any, List
 
 import litellm
 from loguru import logger
-from src.config.config_loader import get_settings
-from src.chatbot.tools import TOOLS, TOOL_FUNCTIONS
+from devops_llm.config.config_loader import get_settings
+from devops_llm.chatbot.tools import TOOLS, TOOL_FUNCTIONS
 
 settings = get_settings()
 
