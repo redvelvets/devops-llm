@@ -1,6 +1,6 @@
 from openai import OpenAI
 from loguru import logger
-from src.config.config_loader import get_settings
+from config.config_loader import get_settings
 
 settings = get_settings()
 def test_aliyun_llm():

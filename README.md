@@ -7,7 +7,8 @@
 | 模块 | 功能描述 |
 |------|----------|
 | LLM 调用 | 已实现，支持通过 `openai` 和 `litellm` 客户端调用远程大模型服务（如阿里云 DashScope、OpenAI 等） |
-| Function Call | 待实现，计划支持本地函数自动调用机制 |
+| Function Call | 已实现，支持通过 `litellm` 进行工具调用，可执行时间查询、数学计算和知识库搜索等操作 |
+| 聊天机器人 | 已实现，基于 `litellm` 的命令行聊天机器人，支持对话历史管理和工具调用 |
 | MCP 协议 | 待实现，未来将集成 Multi Capability Protocol 实现多智能体协作 |
 
 ---
@@ -21,13 +22,28 @@
 - 使用 `litellm` 进行统一接口调用，支持多种后端（OpenAI、DashScope 等）
 
 #### 示例文件：
-- [test_openai_aliyun_llm.py](file://E:\project-code\Devops-LLM\src\test\test_openai_aliyun_llm.py)
-- [test_litellm_aliyun_llm.py](file://E:\project-code\Devops-LLM\src\test\test_litellm_aliyun_llm.py)
+- [test_openai_aliyun_llm.py](src/tests/test_openai_aliyun_llm.py)
+- [test_litellm_aliyun_llm.py](src/tests/test_litellm_aliyun_llm.py)
 
 #### 特点：
 - 支持 system/user/assistant 角色对话
 - 可切换不同模型（如 qwen-plus, gpt-3.5-turbo）
 - 支持设置额外参数（如 enable_thinking）
+
+### 2. 聊天机器人（ChatBot）
+
+#### 当前功能：
+- 基于 `litellm` 的命令行聊天机器人
+- 支持工具调用（Function Calling）
+- 支持对话历史管理
+
+#### 示例文件：
+- [test_chatbot.py](src/tests/test_chatbot.py)
+
+#### 特点：
+- 支持获取当前时间、执行数学计算和知识库搜索等工具函数
+- 完整的对话历史管理
+- 友好的命令行界面
 
 ---
 
@@ -55,12 +71,18 @@ api_key = "<你的阿里云百炼平台的token>"
 
 ## 📦 依赖管理
 
-本项目使用 [`uv`](https://docs.astral.sh/uv/) 作为依赖管理和构建工具，替代了传统的 Poetry 或 pipenv。
+本项目使用 [`uv`](https://docs.astral.sh/uv/) 作为依赖管理和构建工具，替代了传统的 Poetry 或 pipenv。也可以使用pip安装依赖。
 
-### 安装依赖
+### 安装依赖（使用uv）
 
 ```bash
 uv sync
+```
+
+### 安装依赖（使用pip）
+
+```bash
+pip install litellm openai loguru dynaconf
 ```
 
 ### 添加新依赖
@@ -81,24 +103,39 @@ uv develop
 
 ```
 src/
+├── chatbot/                          # 聊天机器人模块
+│   ├── __init__.py                   # 包初始化文件
+│   ├── chatbot.py                    # 聊天机器人核心类
+│   ├── cli.py                        # 命令行界面
+│   └── tools.py                      # 工具函数定义
 ├── config/
-│   ├── .secrets.toml         # 敏感配置文件（未提交）
-│   └── config_loader.py      # 配置加载模块
-└── test/
-    ├── test_openai_aliyun_llm.py     # 使用 openai SDK 调用阿里云 LLM
-    └── test_litellm_aliyun_llm.py    # 使用 litellm 调用 LLM
+│   ├── .secrets.toml                 # 敏感配置文件（未提交）
+│   └── config_loader.py              # 配置加载模块
+├── tests/
+│   ├── test_chatbot.py               # 聊天机器人测试
+│   ├── test_openai_aliyun_llm.py     # 使用 openai SDK 调用阿里云 LLM
+│   └── test_litellm_aliyun_llm.py    # 使用 litellm 调用 LLM
+└── main.py                           # 主入口文件
 ```
-
-> ⚠️ 注意：MCP 模块尚未开始开发，相关目录和文件暂未创建。
 
 ---
 
 ## ✅ 快速开始
 
-运行测试示例：
+### 运行聊天机器人
 
 ```bash
-uv run src/tests/test_litellm_aliyun_llm.py
+python src/main.py
+```
+
+### 运行测试示例
+
+```bash
+python src/tests/test_chatbot.py
+```
+
+```bash
+python src/tests/test_litellm_aliyun_llm.py
 ```
 
 ---
